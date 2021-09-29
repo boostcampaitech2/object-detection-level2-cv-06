@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# baseline
+dataset/
+detectron2/
+faster_rcnn/
+mission/
+mmdetection/
+requirements.txt
+
+# Pytorch
+*.pth
+*.py~
+*.sh~
+*.ipynb_checkpoints

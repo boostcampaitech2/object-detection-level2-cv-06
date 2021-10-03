@@ -16,3 +16,7 @@ requirements.txt
 *.py~
 *.sh~
 *.ipynb_checkpoints
+
+#wandb & mmcv
+*.log
+*.log.json

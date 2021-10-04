@@ -11,6 +11,9 @@ mission/
 mmdetection/
 requirements.txt
 
+# tmp
+work_dirs/
+
 # Pytorch
 *.pth
 *.py~

@@ -4,15 +4,19 @@ __pycache__/
 *$py.class
 
 # baseline
-dataset/
 detectron2/
 faster_rcnn/
 mission/
 mmdetection/
 requirements.txt
 
-# tmp
-work_dirs/
+#dataset
+dataset/test/
+dataset/train/
+
+# work_dirs
+work_dirs/**
+!listup/
 
 # Pytorch
 *.pth

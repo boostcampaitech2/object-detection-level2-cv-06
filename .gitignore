@@ -25,5 +25,4 @@ work_dirs/**
 *.ipynb_checkpoints
 
 #wandb & mmcv
-*.log
-*.log.json
+wandb/

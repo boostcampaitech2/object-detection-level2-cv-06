@@ -20,7 +20,7 @@ object-detection-level2-cv-06/
 ├── mmconfig/ # mmdetection용 config 모음
 │   ├─ datasets/ # dataset configs
 │   ├─ models/ # model configs
-│   │  └─ pretrained # pretrained save pth path
+│   │  └─ pretrained/ # pretrained save pth path
 │   ├─ schedules/ # schedule configs
 │   ├─ runtime/ # runtime configs
 │   ├─ sample/ # old style configs, current not used

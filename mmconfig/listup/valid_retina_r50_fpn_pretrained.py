@@ -1,5 +1,5 @@
 _base_ = [
-    '../models/retinanet_r50_fpn.py',
+    '../models/retinanet_r50_fpn_class10.py',
     '../datasets/valid_search_dataset.py',
     '../schedules/schedule_adam_2x.py', '../runtime/valid_search_wandb_runtime.py'
 ]

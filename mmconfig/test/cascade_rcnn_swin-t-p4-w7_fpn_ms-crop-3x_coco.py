@@ -1,9 +1,9 @@
 _base_ = [
-    '../../models/cascade_rcnn_r50_fpn.py',
+    '../models/cascade_rcnn_r50_fpn.py',
     #'coco_instance.py',
-    '../../datasets/dataset.py',
-    '../../runtime/valid_search_wandb_runtime.py',
-    '../../schedules/schedule_1x.py'
+    '../datasets/dataset.py',
+    '../runtime/valid_search_wandb_runtime.py',
+    '../schedules/schedule_1x.py'
 ]
 pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_tiny_patch4_window7_224.pth'  # noqa
 model = dict(

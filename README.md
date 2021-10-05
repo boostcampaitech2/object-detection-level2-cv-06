@@ -10,7 +10,7 @@
 
 ## contents
 ```
-object-detection-level2-cv-06/
+object-detection-level2-cv-06(*detection)/
 ├── EDA/ # EDA files
 ├── dataset/
 │   ├─ candidate/ # valid candidate
@@ -34,6 +34,7 @@ object-detection-level2-cv-06/
 │   └─ *listup/ # 작업 결과들 중에 공유가 필요하다고 선택된 출력파일을 폴더 단위로 업로드
 └── mmdetection/ # import mmdetection library in this path
 ```
+- mmdetection의 load_from 이 절대경로밖에 지원하지 않아 object-detection-level2-cv-06이 detection이 되어야합니다. (`/opt/ml/detection/`)
 - `work_dirs/listup/` 내의 각 폴더는 [\*.log, \*.py, \*.pth] 폴더를 포함한다.
   - \*.log : 최종 출력 로그
   - \*.py : 최종 config 파일

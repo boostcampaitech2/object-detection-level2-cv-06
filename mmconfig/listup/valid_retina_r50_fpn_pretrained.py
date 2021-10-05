@@ -25,5 +25,5 @@ log_config = dict(
     ])
 
 
-load_from='/opt/ml/detection/mmdetection/weights/retinanet_r50_fpn_1x_coco_20200130-c2398f9e.pth'
+load_from='/opt/ml/detection/mmconfig/models/pretrained/retinanet_r50_fpn_1x_coco_20200130-c2398f9e.pth'
 # path: https://download.openmmlab.com/mmdetection/v2.0/retinanet/retinanet_r50_fpn_1x_coco/retinanet_r50_fpn_1x_coco_20200130-c2398f9e.pth

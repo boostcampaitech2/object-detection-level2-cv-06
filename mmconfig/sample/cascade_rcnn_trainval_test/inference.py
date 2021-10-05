@@ -17,7 +17,7 @@ classes = ("General trash", "Paper", "Paper pack", "Metal", "Glass",
            "Plastic", "Styrofoam", "Plastic bag", "Battery", "Clothing")
 
 # config file 들고오기
-cfg = Config.fromfile('/opt/ml/detection/mmconfig/listup/valid_retina_r50_fpn_pretrained.py')
+cfg = Config.fromfile('/opt/ml/personel/cascade_rcnn/config.py')
 
 # dataset config 수정
 cfg.data.test.test_mode = True
@@ -36,7 +36,7 @@ data_loader = build_dataloader(
         shuffle=False)
 
 
-cfg.work_dir = '/opt/ml/detection/work_dirs/valid_retina_r50_fpn_pretrained'
+
 # checkpoint path
 checkpoint_path = os.path.join(cfg.work_dir, f'epoch_{epoch}.pth')
 

@@ -116,6 +116,7 @@ val_pipeline = [
     dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels']),
 ]
 data = dict(train=dict(pipeline=train_pipeline),val=dict(pipeline=val_pipeline))
+evaluation = dict(interval=1, metric='bbox', save_best='bbox_mAP_50')
 
 checkpoint_config = dict(interval=1)
 # yapf:disable

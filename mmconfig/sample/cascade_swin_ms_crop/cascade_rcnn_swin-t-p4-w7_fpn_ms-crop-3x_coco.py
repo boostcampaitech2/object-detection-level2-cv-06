@@ -1,9 +1,9 @@
 _base_ = [
-    'cascade_rcnn_r50_fpn.py',
+    '../../models/cascade_rcnn_r50_fpn.py',
     #'coco_instance.py',
-    'dataset.py',
-    'default_runtime.py',
-    'schedule_1x.py'
+    '../../datasets/dataset.py',
+    '../../runtime/valid_search_wandb_runtime.py',
+    '../../schedules/schedule_1x.py'
 ]
 pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_tiny_patch4_window7_224.pth'  # noqa
 model = dict(
@@ -116,6 +116,28 @@ val_pipeline = [
     dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels']),
 ]
 data = dict(train=dict(pipeline=train_pipeline),val=dict(pipeline=val_pipeline))
+
+checkpoint_config = dict(interval=1)
+# yapf:disable
+log_config = dict(
+    interval=50,
+    hooks=[
+        dict(type='TextLoggerHook'),
+        # dict(
+        #     type='WandbLoggerHook',
+        #     init_kwargs=dict(
+        #         project='valid_search',
+        #         name='YOUR_EXP'
+        #     ))
+    ])
+# yapf:enable
+custom_hooks = [dict(type='NumClassCheckHook')]
+
+dist_params = dict(backend='nccl')
+log_level = 'INFO'
+load_from = None
+resume_from = None
+workflow = [('train', 1)]
 
 optimizer = dict(
     _delete_=True,

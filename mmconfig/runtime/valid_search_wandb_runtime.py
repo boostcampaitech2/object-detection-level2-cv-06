@@ -1,5 +1,5 @@
 _base_ = [
-    '/opt/ml/detection/mmdetection/configs/_base_/default_runtime.py'
+    '../../configs/_base_/default_runtime.py'
 ]
 
 log_config = dict(

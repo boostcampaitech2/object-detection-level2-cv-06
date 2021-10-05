@@ -22,7 +22,7 @@ log_config = dict(
             type='WandbLoggerHook',
             init_kwargs=dict(
                 project='valid_search',
-                name='test_valid_faster-rcnn_pretrained'
+                name='valid_faster-rcnn_pretrained' # ex) [jkj_01]valid_faster-rcnn_pretrained
             ))
     ])
 

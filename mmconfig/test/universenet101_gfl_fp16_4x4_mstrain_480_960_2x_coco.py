@@ -1,6 +1,6 @@
 _base_ = [
     '../models/universenet101_gfl.py',
-    '../datasets/team_base_dataset.py',
+    '../datasets/coco_detection_mstrain_480_960.py',
     '../schedules/schedule_adam_2x.py', '../runtime/valid_search_wandb_runtime.py'
 ]
 
@@ -15,7 +15,6 @@ optimizer_config = dict(
 lr_config = dict(warmup_iters=1000)
 
 fp16 = dict(loss_scale=512.)
-
 
 # --runtime--
 log_config = dict(

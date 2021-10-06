@@ -83,7 +83,7 @@ for i, out in enumerate(output):
 submission = pd.DataFrame()
 submission['PredictionString'] = prediction_strings
 submission['image_id'] = file_names
-submission.to_csv(os.path.join(cfg.work_dir, f'sub_{args.filename}_{epoch}.csv'), index=None)
+submission.to_csv(os.path.join(cfg.work_dir, f'sub_{args.filename}.csv'), index=None)
 submission.head()
 
 

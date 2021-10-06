@@ -21,7 +21,9 @@ classes = ("General trash", "Paper", "Paper pack", "Metal", "Glass",
            "Plastic", "Styrofoam", "Plastic bag", "Battery", "Clothing")
 
 
-parser = argparse.ArgumentParser('cfg_dir',type = str, description='enter config(in work_dir) directory in absolute path')
+parser = argparse.ArgumentParser(description = 'inference file')
+parser.add_argument('--cfg_dir', help='enter config directory in absolute path')
+parser.add_argument('--filename', help = 'enter weight file name(without extension)')
 args = parser.parse_args()
 cfg_dir = args.cfg_dir
 
@@ -47,7 +49,7 @@ data_loader = build_dataloader(
 
 
 # checkpoint path
-checkpoint_path = os.path.join(cfg.work_dir, f'epoch_{epoch}.pth')
+checkpoint_path = os.path.join(cfg.work_dir, f'{args.filename}.pth')
 
 model = build_detector(cfg.model, test_cfg=cfg.get('test_cfg')) # build detector
 checkpoint = load_checkpoint(model, checkpoint_path, map_location='cpu') # ckpt load
@@ -81,7 +83,7 @@ for i, out in enumerate(output):
 submission = pd.DataFrame()
 submission['PredictionString'] = prediction_strings
 submission['image_id'] = file_names
-submission.to_csv(os.path.join(cfg.work_dir, f'submission_{epoch}.csv'), index=None)
+submission.to_csv(os.path.join(cfg.work_dir, f'sub_{args.filename}_{epoch}.csv'), index=None)
 submission.head()
 
 

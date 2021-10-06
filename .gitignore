@@ -23,6 +23,7 @@ work_dirs/**
 *.py~
 *.sh~
 *.ipynb_checkpoints
+*.out
 
 #wandb & mmcv
 wandb/

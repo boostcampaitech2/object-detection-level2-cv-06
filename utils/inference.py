@@ -21,7 +21,7 @@ classes = ("General trash", "Paper", "Paper pack", "Metal", "Glass",
            "Plastic", "Styrofoam", "Plastic bag", "Battery", "Clothing")
 
 
-parser = argparse.ArgumentParser('cfg_dir',type = str, description='enter config directory in absolute path')
+parser = argparse.ArgumentParser('cfg_dir',type = str, description='enter config(in work_dir) directory in absolute path')
 args = parser.parse_args()
 cfg_dir = args.cfg_dir
 

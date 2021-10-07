@@ -9,7 +9,7 @@ log_config = dict(
             type='WandbLoggerHook',
             init_kwargs=dict(
                 project='model',
-                name='yolov3_d53_fp16_mstrain-608_273e_coco'
+                name='yolov3_test'
             ))
     ])
 

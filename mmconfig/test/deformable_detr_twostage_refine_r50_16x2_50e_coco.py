@@ -8,7 +8,7 @@ _base_=[
 checkpoint_config = dict(max_keep_ckpts=3, interval=1)
 
 # init_weights = True
-load_from = '/opt/ml/detection/mmconfig/models/pretrained/deformable_detr_r50_16x2_50e_coco_20210419_220030-a12b9512.pth'
+load_from = '/opt/ml/detection/mmconfig/models/pretrained/deformable_detr_twostage_refine_r50_16x2_50e_coco_20210419_220613-9d28ab72.pth'
 
 data_root = '/opt/ml/detection/dataset/'
 data = dict(
@@ -24,9 +24,11 @@ log_config = dict(
         dict(
             type='WandbLoggerHook',
             init_kwargs=dict(
-                project='valid_search',
-                name='[jkj_03]def_detr_pretrained' # ex) [jkj_01]valid_faster-rcnn_pretrained
+                project='detr',
+                name='2stage_def_detr_ptr' # ex) [jkj_01]valid_faster-rcnn_pretrained
             ))
     ])
 
-#path: https://download.openmmlab.com/mmdetection/v2.0/cascade_rcnn/cascade_rcnn_r50_fpn_1x_coco/cascade_rcnn_r50_fpn_1x_coco_20200316-3dc56deb.pth
+model = dict(bbox_head=dict(with_box_refine=True, as_two_stage=True))
+
+#path: https://download.openmmlab.com/mmdetection/v2.0/deformable_detr/deformable_detr_twostage_refine_r50_16x2_50e_coco/deformable_detr_twostage_refine_r50_16x2_50e_coco_20210419_220613-9d28ab72.pth

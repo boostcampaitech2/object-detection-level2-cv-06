@@ -7,6 +7,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import collections
+import albumentations as A
+
 
 
 def json2df(anno_source: str)->pd.DataFrame:
@@ -26,6 +28,9 @@ def json2df(anno_source: str)->pd.DataFrame:
     return df_anno
 
 
+def resize_pipe():
+    pass
+
 def get_image_id(df_anno: pd.DataFrame, image_num: int, bbox_number) -> list:
     if bbox_number != 0:
         image_list = []
@@ -39,23 +44,39 @@ def get_image_id(df_anno: pd.DataFrame, image_num: int, bbox_number) -> list:
         image_list = df_anno['image_id'].unique()
         return np.random.choice(image_list, image_num * 4)
 
+   
 
-def scale_boxes(df_anno: pd.DataFrame, images: list):
-    assert len(images) == 4
+
+
+def concat_images_bbox(df_anno: pd.DataFrame, image_dir: str, image_ids: list, new_id: int) -> np.ndarray:
+    #input: origin image(1024*1024)
+    assert len(image_ids) == 4
+    from PIL import Image
+
+    stack = []
+    for id in image_ids:
+        id = str(id).zfill(4)
+        stack.append(Image.open(os.path.join(image_dir, f"{id}.jpg")))
     
-    for i in images:
-        df_id = df_anno[df_anno['image_id'] == i]
-    return None
+    
+    concated_image = np.concatenate(
+        (
+            np.concatenate((stack[0], stack[1]), axis=2), 
+            np.concatenate((stack[2], stack[3]), axis=2)
+         ), 
+        axis=1
+    )
 
+    assert concated_image.shape == (2048, 2048, 3)
 
-def add_images(images: list) -> np.ndarray:
-    assert len(images) == 4
-    a, b, c, d = images
-    ab = np.concatenate((a, b), axis=1)
-    cd = np.concatenate((c, d), axis=1)
-    concated_image = np.concatenate((ab, cd), axis=0)
+    quarter_dict = {0: (0, 0), 1: (512, 0), 2: (0, 512), 3: (512, 512)}
+    nid = 'mosaic_' + str(new_id)
+    for quarter, id in enumerate(image_ids):
+        df_id = df_anno[df_anno['image_id'] == id].copy()
+        df_id['image_id'] = nid
+        df_id['X'], df_id["Y"] = df_id['X'] + quarter_dict[quarter][0], df_id["Y"] + quarter_dict[quarter][1]
 
-    return concated_image
+    return concated_image, pd.concat([df_anno, df_id], axis = 0)
 
 
 def main(args):
@@ -64,7 +85,6 @@ def main(args):
     by_image = True
     file_name = 'add_mosaic'
     data_dir = os.path.abspath(os.path.join(anno_source, os.pardir))
-
 
     custom_json_dir = '/opt/ml/detection/dataset/candidate'
     extension = '.json'

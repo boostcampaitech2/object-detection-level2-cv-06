@@ -95,8 +95,11 @@ def concat_images_bbox(df_anno: pd.DataFrame, image_dir: str, image_ids: list, n
     return concated_image, df_stack, nid
 
 
-def df2coco(source_anns: dict, processed_anno: pd.DataFrame, anno_id):
-    
+def df2coco(source_anns: dict, processed_anno: pd.DataFrame, anno_id, mosaic_only = False):
+    if mosaic_only:
+        source_anns['images'] = []
+        source_anns['annotations'] = []
+
     for image_id in processed_anno.image_id.unique():
         image_info = {
                         "width": 1024,
@@ -134,6 +137,7 @@ def main(args):
     file_name = 'add_mosaic'
     data_dir = os.path.abspath(os.path.join(anno_source, os.pardir)) + '/train/'
     bbox_constraint = int(args.bbox_num)
+    mosaic_only = bool(int(args.mosaic_only))
 
     custom_json_dir = '/opt/ml/detection/dataset/candidate'
     extension = '.json'
@@ -161,8 +165,8 @@ def main(args):
 
 
     # save processed_anno
-    final_json = df2coco(source_anns, processed_anno, anno_id_s)
-    output_path = os.path.join(custom_json_dir, file_name+'_train'+ extension)   
+    final_json = df2coco(source_anns, processed_anno, anno_id_s, mosaic_only)
+    output_path = os.path.join(custom_json_dir, file_name+'_train_' + f'mosaiconly_{str(mosaic_only)}' + extension)   
 
     with open(output_path, 'w') as outfile:
         json.dump(final_json, outfile, indent=2)
@@ -177,6 +181,7 @@ if __name__=='__main__':
     parser.add_argument('--dir', default = '/opt/ml/detection/dataset/team_train.json', help='direction of json train file(absolute path)')
     # parser.add_argument('--start_from', default = 4883, help='start of file id')
     parser.add_argument('--bbox_num', default = 0, help='if not 0, image under bbox number of N will selected. else all')
+    parser.add_argument('--mosaic_only', default = 0, help = 'if 1, mosaic_only')
     parser.add_argument('--num', default = 5, help='number of mosaic image warning: image may duplicate if mosaic num > 4 * image num(with or without constraint). use at your own risk')
     # parser.add_argument('--mode', help='if under_num, ')
     # json must be under dataset dir

@@ -160,10 +160,10 @@ if __name__ == '__main__':
 
     parser.add_argument('--weight', type = arg_as_list, default = [1]*model_num, help = 'List of info columns')
 
-    parser.add_argument('--nms_bool', default = True)
-    parser.add_argument('--soft_nms_bool', default = True)
-    parser.add_argument('--non_maximum_weighted_bool', default = True)
-    parser.add_argument('--wbf_bool', default = True)
+    parser.add_argument('--nms_bool', default = False)
+    parser.add_argument('--soft_nms_bool', default = False)
+    parser.add_argument('--non_maximum_weighted_bool', default = False)
+    parser.add_argument('--wbf_bool', default = False)
 
     args = parser.parse_args()
 

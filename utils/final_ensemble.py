@@ -87,7 +87,7 @@ def arg_as_list(s):
 def to_submission_format(boxes, scores, labels):
     output = []
     for idx in range(len(boxes)):
-        label = labels[idx]
+        label = int(labels[idx])
         score = scores[idx]
         x,y,w,h = boxes[idx]
         output+=[label, score, x*1024, y*1024, w*1024, h*1024]

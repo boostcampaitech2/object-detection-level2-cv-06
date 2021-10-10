@@ -160,7 +160,7 @@ def main(args):
         non_maximum_weighted_df.to_csv(os.path.join(output_path,'non_maximum_weighted.csv'))
 
     if args.wbf_bool:
-        weighted_boxes_fusion_df.to_csv(os.path.join(output_path,'weighted_boxes_fusion.csv'))
+        weighted_boxes_fusion_df.to_csv(os.path.join(output_path,'weighted_boxes_fusion.csv'), index = False)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='script for creating ensemble csv file')

@@ -121,16 +121,6 @@ def main(args):
 
         labels_list, scores_list, boxes_list = format_change(image_id)
 
-        # print(labels_list,scores_list,boxes_list)
-        # print(len(labels_list), len(scores_list), len(boxes_list))
-        # print(len(labels_list[0]), len(labels_list[1]), len(labels_list[2]))
-
-        # iou_thr = 0.5
-        # skip_box_thr = 0.0001
-        # sigma = 0.1
-
-        # weights = [2, 1, 1]
-
         iou_thr = args.iou_thr
         skip_box_thr = args.skip_box_thr
         sigma = args.sigma
@@ -151,13 +141,13 @@ def main(args):
                 weighted_boxes_fusion_make(image_id, boxes_list, scores_list, labels_list, weights, iou_thr, skip_box_thr)
 
     if args.nms_bool:
-        nms_df.to_csv(os.path.join(output_path,'nms.csv'))
+        nms_df.to_csv(os.path.join(output_path,'nms.csv'), index = False)
 
     if args.soft_nms_bool:
-        softnms_df.to_csv(os.path.join(output_path,'soft_nms.csv'))
+        softnms_df.to_csv(os.path.join(output_path,'soft_nms.csv'), index = False)
         
     if args.non_maximum_weighted_bool:
-        non_maximum_weighted_df.to_csv(os.path.join(output_path,'non_maximum_weighted.csv'))
+        non_maximum_weighted_df.to_csv(os.path.join(output_path,'non_maximum_weighted.csv'), index = False)
 
     if args.wbf_bool:
         weighted_boxes_fusion_df.to_csv(os.path.join(output_path,'weighted_boxes_fusion.csv'), index = False)

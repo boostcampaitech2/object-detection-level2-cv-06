@@ -1,0 +1,34 @@
+_base_ = [
+    '../datasets/team_base_dataset_aug.py',
+    '../models/faster_rcnn_r50_fpn_class10.py',
+    '../schedules/schedule_adam_2x.py', 
+    '../runtime/model_wandb_runtime.py'
+]
+
+checkpoint_config = dict(max_keep_ckpts=3, interval=1)
+optimizer_config = dict(_delete_=True, grad_clip=dict(max_norm=35, norm_type=2))
+# init_weights = True
+load_from = '/opt/ml/detection/mmconfig/models/pretrained/faster_rcnn_r50_fpn_2x_coco_bbox_mAP-0.384_20200504_210434-a5d8aa15.pth'
+
+data_root = '/opt/ml/detection/dataset/'
+data = dict(
+    train=dict(ann_file=data_root + 'candidate/'+'team_train_remove_under_750.json')
+)
+
+
+log_config = dict(
+    hooks=[
+        dict(type='TextLoggerHook'),
+        dict(
+            type='WandbLoggerHook',
+            init_kwargs=dict(
+                project='model',
+                name='[aug_04] remove_under_750_new_aug_faster-rcnn_pretrained' # ex) [jkj_01]valid_faster-rcnn_pretrained
+            ))
+    ])
+
+runner = dict(type='EpochBasedRunner', max_epochs=30)
+
+seed=1004
+
+# nohup sh -c 'python /opt/ml/detection/mmdetection/tools/train.py /opt/ml/detection/mmconfig/test/faster-rcnn_pretrained_augmentation_4.py 1> /dev/null 2>&1 && python /opt/ml/detection/mmdetection/tools/train.py /opt/ml/detection/mmconfig/test/faster-rcnn_pretrained_augmentation_3.py' &

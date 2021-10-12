@@ -1,6 +1,7 @@
 import os
 import ast
 import argparse
+import numpy as np
 import pandas as pd
 import time
 from tqdm import tqdm 
@@ -21,10 +22,14 @@ models_path = [os.path.join(base_path, path) for path in models]
 
 # model number
 model_num = 0
+models = []
 for path in models_path:
     if path.split('.')[-1] == 'csv':
         model_num += 1
+        models.append(pd.read_csv(path))
 
+print(f"selected {len(models)} models")
+    
 image_num = pd.read_csv(models_path[0]).shape[0]
 
 test = pd.read_csv(models_path[0])
@@ -40,43 +45,47 @@ non_maximum_weighted_df['image_id'] = test['image_id']
 weighted_boxes_fusion_df = pd.DataFrame(index=range(0,image_num), columns = columns)
 weighted_boxes_fusion_df['image_id'] = test['image_id']
 
+print("-"*40)
+
+
 # ensemble_boxes format 
 def format_change(image_id):
     # model 단위로 append
     labels_list = []
     scores_list = []
     boxes_list = []
+    model_select = []
 
-    for model_path in models_path:
-        if model_path.split('.')[-1] == 'csv': # csv 파일만 처리
+    for model_idx, model in enumerate(models):
+        prediction = model['PredictionString'][image_id]
 
-            model = pd.read_csv(model_path)
-            prediction = model['PredictionString'][image_id]
+        labels = []
+        scores = []
+        bbox = []
 
-            labels = []
-            scores = []
-            bbox = []
+        # type 에러 체크
+        if prediction and type(prediction) == str:
+            original = prediction.split(' ')
+            i = 0
+            # label, score, box -> split
+            for idx in range(len(original)//6):
+                # 마지막 ' ' 예외 처리
+                try:
+                    label, score, x,y,w,h = map(float, original[i:i+6])
+                    i += 6
+                    labels.append(int(label))
+                    scores.append(score)
+                    bbox.append([x/1024,y/1024,w/1024,h/1024])
+                except: 
+                    print(f'unknwon_error in prediction parsing')
+                    continue
 
-            # type 에러 체크
-            if type(model['PredictionString'][image_id]) == str:
-                original = prediction.split(' ')
-                i = 0
-                # label, score, box -> split
-                for idx in range(len(model['PredictionString'][image_id])//6):
-                    # 마지막 ' ' 예외 처리
-                    try:
-                        label, score, x,y,w,h = map(float, original[i:i+6])
-                        i += 6
-                        labels.append(int(label))
-                        scores.append(score)
-                        bbox.append([x/1024,y/1024,w/1024,h/1024])
-                    except: 
-                        continue
+            labels_list.append(labels)
+            scores_list.append(scores)
+            boxes_list.append(bbox)
+            model_select.append(model_idx)
 
-                labels_list.append(labels)
-                scores_list.append(scores)
-                boxes_list.append(bbox)
-    return labels_list, scores_list, boxes_list
+    return labels_list, scores_list, boxes_list, model_select
 
 def arg_as_list(s):
     v = ast.literal_eval(s)
@@ -117,28 +126,32 @@ def weighted_boxes_fusion_make(image_id, boxes_list, scores_list, labels_list, w
 
     # image 단위 ensemble
 def main(args):
+    iou_thr = args.iou_thr
+    skip_box_thr = args.skip_box_thr
+    sigma = args.sigma
+    weights = np.array(args.weight)
+    
     for image_id in tqdm(range(image_num)):
 
-        labels_list, scores_list, boxes_list = format_change(image_id)
-
-        iou_thr = args.iou_thr
-        skip_box_thr = args.skip_box_thr
-        sigma = args.sigma
-        weights = args.weight
+        labels_list, scores_list, boxes_list, model_idx = format_change(image_id)
+        cur_weight = weights[model_idx]
+        # print(labels_list)
+        # print(model_idx)
+        # print(cur_weight)
 
         if labels_list and scores_list and boxes_list:
 
             if args.nms_bool:
-                nms_make(image_id, boxes_list, scores_list, labels_list, weights, iou_thr)
+                nms_make(image_id, boxes_list, scores_list, labels_list, cur_weight, iou_thr)
 
             if args.soft_nms_bool:
-                soft_nms_make(image_id, boxes_list, scores_list, labels_list, weights, iou_thr, sigma, skip_box_thr)
+                soft_nms_make(image_id, boxes_list, scores_list, labels_list, cur_weight, iou_thr, sigma, skip_box_thr)
             
             if args.non_maximum_weighted_bool:
-                non_maximum_weighted_make(image_id, boxes_list, scores_list, labels_list, weights, iou_thr, skip_box_thr)
+                non_maximum_weighted_make(image_id, boxes_list, scores_list, labels_list, cur_weight, iou_thr, skip_box_thr)
 
             if args.wbf_bool:
-                weighted_boxes_fusion_make(image_id, boxes_list, scores_list, labels_list, weights, iou_thr, skip_box_thr)
+                weighted_boxes_fusion_make(image_id, boxes_list, scores_list, labels_list, cur_weight, iou_thr, skip_box_thr)
 
     if args.nms_bool:
         nms_df.to_csv(os.path.join(output_path,'nms.csv'), index = False)
@@ -160,10 +173,10 @@ if __name__ == '__main__':
 
     parser.add_argument('--weight', type = arg_as_list, default = [1]*model_num, help = 'List of info columns')
 
-    parser.add_argument('--nms_bool', default = False)
-    parser.add_argument('--soft_nms_bool', default = False)
-    parser.add_argument('--non_maximum_weighted_bool', default = False)
-    parser.add_argument('--wbf_bool', default = False)
+    parser.add_argument('--nms_bool', default = True)
+    parser.add_argument('--soft_nms_bool', default = True)
+    parser.add_argument('--non_maximum_weighted_bool', default = True)
+    parser.add_argument('--wbf_bool', default = True)
 
     args = parser.parse_args()
 

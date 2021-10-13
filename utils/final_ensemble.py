@@ -9,7 +9,7 @@ from tqdm import tqdm
 from ensemble_boxes import *
 
 
-base_path = args.base_path
+base_path = './ensemble_models/'
 models = os.listdir(base_path)
 
 # 앙상블 모델 확인
@@ -169,7 +169,6 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='script for creating ensemble csv file')
-    parser.add_argument('--base_path', type = str, default = './ensemble_models/')
     parser.add_argument('--iou_thr', type = float, default = 0.5)
     parser.add_argument('--skip_box_thr', default = 0.0001)
     parser.add_argument('--sigma', default = 0.1)

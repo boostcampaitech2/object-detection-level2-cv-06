@@ -84,6 +84,8 @@ def format_change(image_id):
             scores_list.append(scores)
             boxes_list.append(bbox)
             model_select.append(model_idx)
+        else:
+            print(f"{image_id} in {model_idx} Error")
 
     return labels_list, scores_list, boxes_list, model_select
 

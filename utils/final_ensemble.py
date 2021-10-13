@@ -128,6 +128,45 @@ def weighted_boxes_fusion_make(image_id, boxes_list, scores_list, labels_list, w
 
     # image 단위 ensemble
 def main(args):
+    base_path = './ensemble_models/'
+    models = os.listdir(base_path)
+
+    # 앙상블 모델 확인
+    print(models)
+
+    output_path = base_path + 'output'
+    os.makedirs(output_path, exist_ok=True)
+
+    models_path = [os.path.join(base_path, path) for path in models]
+
+    # model number
+    model_num = 0
+    models = []
+    for path in models_path:
+        if path.split('.')[-1] == 'csv':
+            model_num += 1
+            models.append(pd.read_csv(path))
+
+    print(f"selected {len(models)} models")
+        
+    image_num = pd.read_csv(models_path[0]).shape[0]
+
+    test = pd.read_csv(models_path[0])
+
+    columns = ['PredictionString']
+
+    nms_df = pd.DataFrame(index=range(0,image_num), columns = columns)
+    nms_df['image_id'] = test['image_id']
+    softnms_df = pd.DataFrame(index=range(0,image_num), columns = columns)
+    softnms_df['image_id'] = test['image_id']
+    non_maximum_weighted_df = pd.DataFrame(index=range(0,image_num), columns = columns)
+    non_maximum_weighted_df['image_id'] = test['image_id']
+    weighted_boxes_fusion_df = pd.DataFrame(index=range(0,image_num), columns = columns)
+    weighted_boxes_fusion_df['image_id'] = test['image_id']
+
+    print("-"*40)
+
+
     iou_thr = args.iou_thr
     skip_box_thr = args.skip_box_thr
     sigma = args.sigma
@@ -169,6 +208,8 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='script for creating ensemble csv file')
+    
+    # parser.add_argument('--base_path', type = str, default = './ensemble_models/')
     parser.add_argument('--iou_thr', type = float, default = 0.5)
     parser.add_argument('--skip_box_thr', default = 0.0001)
     parser.add_argument('--sigma', default = 0.1)

@@ -7,7 +7,7 @@ import time
 from tqdm import tqdm 
 
 from ensemble_boxes import *
-
+from copy import deepcopy
 
 base_path = './ensemble_models/'
 models = os.listdir(base_path)
@@ -28,7 +28,7 @@ for path in models_path:
         model_num += 1
         models.append(pd.read_csv(path))
 
-print(f"selected {len(models)} models")
+print(f"selected {len(models)} models. {models}")
     
 image_num = pd.read_csv(models_path[0]).shape[0]
 
@@ -132,27 +132,29 @@ def main(args):
     skip_box_thr = args.skip_box_thr
     sigma = args.sigma
     weights = np.array(args.weight)
+    print(f"weight : {weights}")
     
     for image_id in tqdm(range(image_num)):
 
-        labels_list, scores_list, boxes_list, model_idx = format_change(image_id)
+        labels_list_orgin, scores_list_orgin, boxes_list_orgin, model_idx = format_change(image_id)
         cur_weight = weights[model_idx]
-        # print(labels_list)
-        # print(model_idx)
-        # print(cur_weight)
 
-        if labels_list and scores_list and boxes_list:
+        if labels_list_orgin and scores_list_orgin and boxes_list_orgin:
 
             if args.nms_bool:
+                labels_list, scores_list, boxes_list = deepcopy(labels_list_orgin), deepcopy(scores_list_orgin), deepcopy(boxes_list_orgin)
                 nms_make(image_id, boxes_list, scores_list, labels_list, cur_weight, iou_thr)
 
             if args.soft_nms_bool:
+                labels_list, scores_list, boxes_list = deepcopy(labels_list_orgin), deepcopy(scores_list_orgin), deepcopy(boxes_list_orgin)
                 soft_nms_make(image_id, boxes_list, scores_list, labels_list, cur_weight, iou_thr, sigma, skip_box_thr)
-            
+
             if args.non_maximum_weighted_bool:
+                labels_list, scores_list, boxes_list = deepcopy(labels_list_orgin), deepcopy(scores_list_orgin), deepcopy(boxes_list_orgin)
                 non_maximum_weighted_make(image_id, boxes_list, scores_list, labels_list, cur_weight, iou_thr, skip_box_thr)
 
             if args.wbf_bool:
+                labels_list, scores_list, boxes_list = deepcopy(labels_list_orgin), deepcopy(scores_list_orgin), deepcopy(boxes_list_orgin)
                 weighted_boxes_fusion_make(image_id, boxes_list, scores_list, labels_list, cur_weight, iou_thr, skip_box_thr)
 
     if args.nms_bool:
@@ -174,6 +176,7 @@ if __name__ == '__main__':
     parser.add_argument('--sigma', default = 0.1)
 
     parser.add_argument('--weight', type = arg_as_list, default = [1]*model_num, help = 'List of info columns')
+    # parser.add_argument('--weight', type = arg_as_list, default = [2, 1], help = 'List of info columns')
 
     parser.add_argument('--nms_bool', default = True)
     parser.add_argument('--soft_nms_bool', default = True)

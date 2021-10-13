@@ -25,12 +25,17 @@ def csv2df(output_dir: str, confidence: float):
         for box_idx in range(len(annos)//6):
             st = box_idx *6
             ed = st + 6
-            row = [im_name, idcount] + [float(annos[st:ed][-2]) * float(annos[st:ed][-1])] + annos[st:ed]
+            #annos = ['cls', 'conf', 'X_min', 'Y_min', 'X_max', 'Y_max']
+            ann = annos[st:ed]
+            ann = [float(x) for x in ann]
+            W = ann[-2] - ann[-4]
+            H = ann[-1] - ann[-3]
+            row = [im_name, idcount] + [W*H] + ann[0:-2] + [W, H]
             stack.append(row)
             idcount += 1
 
     df = pd.DataFrame.from_records(stack, columns=['image_id', 'bbox_id', 'area', 'cls', 'conf', 'X', 'Y', 'W', 'H'])
-    df[['area', 'cls', 'conf', 'X', 'Y', 'W', 'H']] = df[['area', 'cls', 'conf', 'X', 'Y', 'W', 'H']].astype(float)
+    # df[['area', 'cls', 'conf', 'X', 'Y', 'W', 'H']] = df[['area', 'cls', 'conf', 'X', 'Y', 'W', 'H']].astype(float)
     df['cls'] = df['cls'].astype(int)
     df = df[df['conf'] > confidence]
     return df
@@ -92,7 +97,7 @@ def main(args):
     test_json = read_json(args.test_dir)
     inference_df = csv2df(args.inf_dir, confidence = float(args.confidence))
 
-    save_dir = os.path.join('/'.join(args.test_dir.split('/')[:-1]), f'pesudo_{args.confidence}_.json')
+    save_dir = os.path.join('/'.join(args.test_dir.split('/')[:-1]),'candidate', f'pesudo_{args.confidence}_.json')
     final_json = df2coco(test_json, inference_df)
     save_anno(final_json, save_dir)
 
@@ -101,7 +106,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='script for creating pesudo label')
     parser.add_argument('--test_dir', default = '/opt/ml/detection/dataset/test.json')
     parser.add_argument('--inf_dir', default='/opt/ml/personel/weighted_boxes_fusion.csv')
-    parser.add_argument('--confidence', default = 0.35, help = 'if 1, mosaic_only')
+    parser.add_argument('--confidence', default = 0.2, help = 'i')
     # parser.add_argument('--num', default = 5, help='number of mosaic image warning: image may duplicate if mosaic num > 4 * image num(with or without constraint). use at your own risk')
 
     args = parser.parse_args()

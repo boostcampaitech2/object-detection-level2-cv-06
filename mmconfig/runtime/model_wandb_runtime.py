@@ -9,7 +9,7 @@ log_config = dict(
             type='WandbLoggerHook',
             init_kwargs=dict(
                 project='model',
-                name='augmentation_faster_rcnn_r50'
+                name=''
             ))
     ])
 

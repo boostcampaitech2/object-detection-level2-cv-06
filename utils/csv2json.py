@@ -21,7 +21,11 @@ def csv2df(output_dir: str, confidence: float):
     stack = []
     for i in tqdm(range(submission_df.shape[0]), leave = False):
         im_name = submission_df.iloc[i, 1]
-        annos = submission_df.iloc[i, 0].split(' ')
+        annos = submission_df.iloc[i, 0]
+        if type(annos) == str:
+            annos = annos.split(' ')
+        else: continue
+        
         for box_idx in range(len(annos)//6):
             st = box_idx *6
             ed = st + 6
@@ -105,8 +109,8 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='script for creating pesudo label')
     parser.add_argument('--test_dir', default = '/opt/ml/detection/dataset/test.json')
-    parser.add_argument('--inf_dir', default='/opt/ml/personel/weighted_boxes_fusion.csv')
-    parser.add_argument('--confidence', default = 0.2, help = 'i')
+    parser.add_argument('--inf_dir', default='/opt/ml/detection/utils/ensemble_models/swin_arug.csv')
+    parser.add_argument('--confidence', default = 0.3, help = 'i')
     # parser.add_argument('--num', default = 5, help='number of mosaic image warning: image may duplicate if mosaic num > 4 * image num(with or without constraint). use at your own risk')
 
     args = parser.parse_args()

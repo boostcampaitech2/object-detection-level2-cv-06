@@ -27,8 +27,9 @@ for path in models_path:
     if path.split('.')[-1] == 'csv':
         model_num += 1
         models.append(pd.read_csv(path))
+        print(path)
 
-print(f"selected {len(models)} models. {models}")
+print(f"selected {len(models)} models.")
     
 image_num = pd.read_csv(models_path[0]).shape[0]
 

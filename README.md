@@ -23,7 +23,7 @@ object-detection-level2-cv-06(*detection)/
 │   ├─ test.json # orginal test.json, full data
 │   ├─ train.json # orginal train.json, full data
 │   ├─ team_train.json # 팀에서 자체적으로 설정한 train set (train.json의 subset)
-│   └─team_valid.json # 팀에서 자체적으로 설정한 valid set (train.json의 subset)
+│   └─ team_valid.json # 팀에서 자체적으로 설정한 valid set (train.json의 subset)
 ├── mmconfig/ # mmdetection용 config 모음
 │   ├─ datasets/ # dataset configs
 │   ├─ models/ # model configs

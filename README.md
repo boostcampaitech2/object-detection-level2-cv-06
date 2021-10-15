@@ -8,6 +8,7 @@
 - torchvision
 - albumentations
 - seaborn
+- wandb
 - https://github.com/open-mmlab/mmdetection
 - https://github.com/shinya7y/UniverseNet
 - https://github.com/ZFTurbo/Weighted-Boxes-Fusion

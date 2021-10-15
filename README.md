@@ -17,7 +17,7 @@
 ```
 object-detection-level2-cv-06(*detection)/
 ├── EDA/ # custom EDA files
-├── dataset/
+├── dataset/ # 전체 데이터 셋
 │   ├─ candidate/ # custom dataset candidate
 │   ├─ sample.json # just sample
 │   ├─ test.json # orginal test.json, full data

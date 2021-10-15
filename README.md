@@ -54,3 +54,12 @@ object-detection-level2-cv-06(*detection)/
   - \*.log : 최종 출력 로그
   - \*.py : 최종 config 파일
   - \*.pth : 최종 제출에 사용된 checkpoint
+
+## result
+- universenet101_gfl_fp16_4x4_mstrain_480_960_2x_coco.py
+  - Public : 0.620, private : 0.595
+- cascade_rcnn_swin_base_patch4_window7_mstrain_480-800_giou_4conv1f_adamw_3x_coco_aug.py
+  - Public : 0.650, private : 0.633
+- ensemble universenet swin 
+  - iou_thr 0.6
+  - Public : 0.687, private : 0.667

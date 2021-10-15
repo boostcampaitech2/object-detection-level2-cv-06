@@ -1,4 +1,5 @@
 # 칠성사이다
+![image](https://user-images.githubusercontent.com/20790778/137433985-622be56d-82eb-4dd7-bbec-c7079b0bf059.png)
 
 ## Requirements
 - python, numpy, pandas
@@ -7,7 +8,7 @@
 - torchvision
 - albumentations
 - seaborn
-
+- https://github.com/open-mmlab/mmdetection
 - https://github.com/shinya7y/UniverseNet
 - https://github.com/ZFTurbo/Weighted-Boxes-Fusion
 

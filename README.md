@@ -17,6 +17,7 @@
 ```
 object-detection-level2-cv-06(*detection)/
 ├── EDA/ # custom EDA files
+│
 ├── dataset/ # 전체 데이터 셋
 │   ├─ candidate/ # custom dataset candidate
 │   ├─ sample.json # just sample
@@ -24,6 +25,7 @@ object-detection-level2-cv-06(*detection)/
 │   ├─ train.json # orginal train.json, full data
 │   ├─ team_train.json # 팀에서 자체적으로 설정한 train set (train.json의 subset)
 │   └─ team_valid.json # 팀에서 자체적으로 설정한 valid set (train.json의 subset)
+│
 ├── mmconfig/ # mmdetection용 config 모음
 │   ├─ datasets/ # dataset configs
 │   ├─ models/ # model configs
@@ -33,6 +35,7 @@ object-detection-level2-cv-06(*detection)/
 │   ├─ sample/ # old style configs, current not used
 │   ├─ listup/ # test config에서 선택되어 분류된 config들
 │   └─ test/ # [datasets, models, schedules, runtime] config 들을 통합한 main config
+│
 ├── utils/ # 부가적으로 필요한 util들  
 │   ├─ ensemble_models/ 앙상블 할 출력물 경로(해당 폴더내에 csv파일을 대상으로 선택한다)
 │   │  └─ output/ 앙상블 결과 파일이 저장되는 경로
@@ -45,8 +48,10 @@ object-detection-level2-cv-06(*detection)/
 │   ├─ mosaic_create.py # dataset의 image와 annotation을 모자이크 기법을 활용해 새로운 파일로 저장
 │   ├─ submission_viewer.ipynb # 제출용 submission csv 파일을 읽어 시각적으로 확인할 수 있게 해주는 viewer
 │   └─ viewer.ipynb # 조건에 따라 이미지 단위, 오브젝트 단위로 이미지를 볼 수있는 viewer
+│
 ├── work_dirs/ # 작업 결과가 저장되는 경로  
 │   └─ *listup/ # 작업 결과들 중에 공유가 필요하다고 선택된 출력파일을 폴더 단위로 업로드
+│
 └── mmdetection/ # import mmdetection library in this path
 ```
 - mmdetection의 load_from 이 절대경로밖에 지원하지 않아 object-detection-level2-cv-06이 detection이 되어야합니다. (`/opt/ml/detection/`)

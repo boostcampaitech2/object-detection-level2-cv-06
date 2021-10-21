@@ -69,3 +69,15 @@ object-detection-level2-cv-06(*detection)/
 - ensemble universenet swin
   - iou_thr 0.6
   - Public : 0.687, private : 0.667
+
+## simple start
+
+### Train
+`python ./mmdetection/tools/train.py /mmconfig/test/universenet101_gfl_fp16_4x4_mstrain_480_960_2x_coco.py`
+
+### Inference
+`python ./utils/inference.py ./work_dirs/listup/{output path}/{config py path} {pth filename}`
+
+### ensemble
+`python ./utils/final_ensemble.py --iou_thr x ...`
+- `utils/ensemble_models/` 경로에 앙상블 할 csv 파일들이 있어야함

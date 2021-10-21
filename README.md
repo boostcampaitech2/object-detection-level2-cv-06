@@ -1,6 +1,11 @@
 # 칠성사이다
 ![image](https://user-images.githubusercontent.com/20790778/137433985-622be56d-82eb-4dd7-bbec-c7079b0bf059.png)
 
+| [강지우](https://github.com/jiwoo0212) | [곽지윤](https://github.com/kwakjeeyoon) | [서지유](https://github.com/JiyouSeo) | [송나은](https://github.com/sne12345) | [오재환](https://github.com/jaehwan-AI) | [이준혁](https://github.com/kmouleejunhyuk) | [전경재](https://github.com/ppskj178) |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138295480-ca0169cd-5c40-44ae-b222-d74d9cc4bc82.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | |
+
+
 ## Requirements
 - python, numpy, pandas
 - pytorch
@@ -9,9 +14,11 @@
 - albumentations
 - seaborn
 - wandb
-- https://github.com/open-mmlab/mmdetection
-- https://github.com/shinya7y/UniverseNet
-- https://github.com/ZFTurbo/Weighted-Boxes-Fusion
+- [Original MMdetection](https://github.com/open-mmlab/mmdetection)
+- [UniverseNet MMdetection(we used)](https://github.com/shinya7y/UniverseNet)
+- [Bbox Ensemble library](https://github.com/ZFTurbo/Weighted-Boxes-Fusion)
+> 본 프로젝트는 MMdetection 라이브러리를 사용하였습니다. 저희가 사용한 버전의 [MMdetection](https://github.com/shinya7y/UniverseNet)를 clone하여 `mmdetection`이라는 디렉터리명으로 변경해주시면 됩니다. 
+
 
 ## contents
 ```

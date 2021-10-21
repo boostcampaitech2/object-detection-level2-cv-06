@@ -76,7 +76,7 @@ object-detection-level2-cv-06(*detection)/
 `python ./mmdetection/tools/train.py /mmconfig/test/universenet101_gfl_fp16_4x4_mstrain_480_960_2x_coco.py`
 
 ### Inference
-`python ./utils/inference.py ./work_dirs/listup/{output path}/{config py path} {pth filename}`
+`python ./utils/make_submission.py ./work_dirs/listup/{output path}/{config py path} {pth filename}`
 
 ### ensemble
 `python ./utils/final_ensemble.py --iou_thr x ...`

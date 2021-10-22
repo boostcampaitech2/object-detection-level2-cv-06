@@ -6,6 +6,7 @@
 | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138295480-ca0169cd-5c40-44ae-b222-d74d9cc4bc82.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | |
 
 
+
 ## Requirements
 - python, numpy, pandas
 - pytorch
@@ -14,11 +15,10 @@
 - albumentations
 - seaborn
 - wandb
-- [Original MMdetection](https://github.com/open-mmlab/mmdetection)
-- [UniverseNet MMdetection(we used)](https://github.com/shinya7y/UniverseNet)
+- [UniverseNet MMdetection](https://github.com/shinya7y/UniverseNet) [include [Original MMdetection](https://github.com/open-mmlab/mmdetection)]
 - [Bbox Ensemble library](https://github.com/ZFTurbo/Weighted-Boxes-Fusion)
-> 본 프로젝트는 MMdetection 라이브러리를 사용하였습니다. 저희가 사용한 버전의 [MMdetection](https://github.com/shinya7y/UniverseNet)를 clone하여 `mmdetection`이라는 디렉터리명으로 변경해주시면 됩니다. 
-
+> 본 프로젝트는 MMdetection 라이브러리를 포함하는 UniverseNet MMdetection을 사용하였습니다.<br>
+> [UniverseNet MMdetection](https://github.com/shinya7y/UniverseNet)을 clone하여 `mmdetection`이라는 디렉토리명으로 아래 폴더 구조에 맞게 위치시켜 주시면 됩니다.
 
 ## contents
 ```
@@ -86,5 +86,5 @@ object-detection-level2-cv-06(*detection)/
 `python ./utils/make_submission.py ./work_dirs/listup/{output path}/{config py path} {pth filename}`
 
 ### ensemble
-`python ./utils/final_ensemble.py --iou_thr x ...`
+`python ./utils/final_ensemble.py --iou_thr {float} ...`
 - `utils/ensemble_models/` 경로에 앙상블 할 csv 파일들이 있어야함

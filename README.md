@@ -10,7 +10,6 @@
 ## Requirements
 - python, numpy, pandas
 - pytorch
-- mmdetection
 - torchvision
 - albumentations
 - seaborn

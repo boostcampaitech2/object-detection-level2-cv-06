@@ -6,6 +6,11 @@
 | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/55044675/138575690-216fc641-dba1-4737-a571-6b1058e780b2.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138295480-ca0169cd-5c40-44ae-b222-d74d9cc4bc82.jpg) | ![d](https://user-images.githubusercontent.com/49234207/138424590-385b34c2-fae2-426f-8abe-8b40d21ba766.jpg)| ![image](https://user-images.githubusercontent.com/20790778/138396418-b669cbed-40b0-45eb-9f60-7167cae739b7.png) | |
 
 
+## Competition Overview
+- 목적: 사진에서 쓰레기를 Detection 하는 모델 제작
+- Dataset: 일반 쓰레기, 플라스틱, 종이, 유리 등 10 종류의 쓰레기가 찍힌 사진 데이터셋 9700여장(train 50%, 대회 평가 50%)
+- 평가 metric: mean Average Precision(mAP50) on test dataset
+
 
 ## Requirements
 - python, numpy, pandas

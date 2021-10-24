@@ -3,7 +3,7 @@
 
 | [강지우](https://github.com/jiwoo0212) | [곽지윤](https://github.com/kwakjeeyoon) | [서지유](https://github.com/JiyouSeo) | [송나은](https://github.com/sne12345) | [오재환](https://github.com/jaehwan-AI) | [이준혁](https://github.com/kmouleejunhyuk) | [전경재](https://github.com/ppskj178) |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138295480-ca0169cd-5c40-44ae-b222-d74d9cc4bc82.jpg) | ![d](https://user-images.githubusercontent.com/49234207/138424590-385b34c2-fae2-426f-8abe-8b40d21ba766.jpg)| ![image](https://user-images.githubusercontent.com/20790778/138396418-b669cbed-40b0-45eb-9f60-7167cae739b7.png) | |
+| ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/55044675/138575690-216fc641-dba1-4737-a571-6b1058e780b2.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138297784-223d2d61-74f7-4a19-8aaf-5525309e2bd8.jpg) | ![image](https://user-images.githubusercontent.com/68782183/138295480-ca0169cd-5c40-44ae-b222-d74d9cc4bc82.jpg) | ![d](https://user-images.githubusercontent.com/49234207/138424590-385b34c2-fae2-426f-8abe-8b40d21ba766.jpg)| ![image](https://user-images.githubusercontent.com/20790778/138396418-b669cbed-40b0-45eb-9f60-7167cae739b7.png) | |
 
 
 
@@ -18,6 +18,7 @@
 - [Bbox Ensemble library](https://github.com/ZFTurbo/Weighted-Boxes-Fusion)
 > 본 프로젝트는 MMdetection 라이브러리를 포함하는 UniverseNet MMdetection을 사용하였습니다.<br>
 > [UniverseNet MMdetection](https://github.com/shinya7y/UniverseNet)을 clone하여 `mmdetection`이라는 디렉토리명으로 아래 폴더 구조에 맞게 위치시켜 주시면 됩니다.
+
 
 ## contents
 ```
@@ -66,6 +67,10 @@ object-detection-level2-cv-06(*detection)/
   - \*.log : 최종 출력 로그
   - \*.py : 최종 config 파일
   - \*.pth : 최종 제출에 사용된 checkpoint
+
+## Project Roadmap
+
+![프레젠테이션1](https://user-images.githubusercontent.com/55044675/138575713-e6060134-a406-4cea-83f7-f5bd0b214058.png)
 
 ## best result
 - /mmconfig/test/universenet101_gfl_fp16_4x4_mstrain_480_960_2x_coco.py

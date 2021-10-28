@@ -80,15 +80,13 @@ object-detection-level2-cv-06(*detection)/
 ## best result
 - /mmconfig/test/universenet101_gfl_fp16_4x4_mstrain_480_960_2x_coco.py
   - Public : 0.620, private : 0.595
+  - **universenet -** [weight download](https://drive.google.com/drive/folders/1pm8GUrOOILf8XKatn6MMISuEjdYr2xu5?usp=sharing)
 - /mmconfig/listup/cascade_rcnn_swin_base_patch4_window7_mstrain_480-800_giou_4conv1f_adamw_3x_coco_aug.py
   - Public : 0.650, private : 0.633
+  - **swin_heavy_aug -** [weight download](https://drive.google.com/drive/folders/1MmG0_ExljbX1v6EKfUfKtCy-3ezs-e8N)
 - ensemble universenet swin
   - iou_thr 0.6
   - Public : 0.687, private : 0.667
-
-## Download Weights
-- [universenet](https://drive.google.com/drive/folders/1pm8GUrOOILf8XKatn6MMISuEjdYr2xu5?usp=sharing)
-- [swin_heavy_aug](https://drive.google.com/drive/folders/1MmG0_ExljbX1v6EKfUfKtCy-3ezs-e8N)
 
 ## simple start
 

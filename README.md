@@ -87,7 +87,8 @@ object-detection-level2-cv-06(*detection)/
   - Public : 0.687, private : 0.667
 
 ## Download Weights
-[universenet, swin_heavy_aug, other pth files](https://drive.google.com/drive/folders/1469SmQ9NFYK0NxD0DS31jBZgDeiTrcAf?usp=sharing)
+- [universenet](https://drive.google.com/drive/folders/1pm8GUrOOILf8XKatn6MMISuEjdYr2xu5?usp=sharing)
+- [swin_heavy_aug](https://drive.google.com/drive/folders/1MmG0_ExljbX1v6EKfUfKtCy-3ezs-e8N)
 
 ## simple start
 

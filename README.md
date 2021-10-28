@@ -86,6 +86,9 @@ object-detection-level2-cv-06(*detection)/
   - iou_thr 0.6
   - Public : 0.687, private : 0.667
 
+## Download Weights
+[universenet, swin_heavy_aug, other pth files](https://drive.google.com/drive/folders/1469SmQ9NFYK0NxD0DS31jBZgDeiTrcAf?usp=sharing)
+
 ## simple start
 
 ### Train

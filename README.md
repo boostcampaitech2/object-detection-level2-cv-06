@@ -90,7 +90,7 @@ object-detection-level2-cv-06(*detection)/
 
 ## simple start
 
-### requirement
+### environment
 `python pip install requirement.txt`
 
 ### Train

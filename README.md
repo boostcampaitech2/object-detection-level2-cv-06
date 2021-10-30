@@ -91,7 +91,7 @@ object-detection-level2-cv-06(*detection)/
 ## simple start
 
 ### environment
-`python pip install requirement.txt`
+`pip install requirement.txt`
 
 ### Train
 `python ./mmdetection/tools/train.py /mmconfig/test/universenet101_gfl_fp16_4x4_mstrain_480_960_2x_coco.py`
